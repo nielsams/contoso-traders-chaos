@@ -1,1 +1,1 @@
-# contoso-traders-chaos
+# contoso-traders-v2

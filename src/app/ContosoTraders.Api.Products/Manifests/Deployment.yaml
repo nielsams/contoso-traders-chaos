@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: contoso-traders-products
+spec:
+  replicas: {AKS_REPLICAS}
+  selector:
+    matchLabels:
+      app: contoso-traders-products
+  template:
+    metadata:
+      labels:
+        app: contoso-traders-products
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      containers:
+        - name: contoso-traders-products
+          image: {ACR_NAME}.azurecr.io/{ACR_REPO_PRODUCTS_NAME}:{PRODUCTS_IMAGE_TAG}
+          env:
+            - name: KeyVaultEndpoint
+              valueFrom:
+                secretKeyRef:
+                  name: contoso-traders-kv-endpoint
+                  key: contoso-traders-kv-endpoint
+            - name: ManagedIdentityClientId
+              valueFrom:
+                secretKeyRef:
+                  name: contoso-traders-mi-clientid
+                  key: contoso-traders-mi-clientid
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi

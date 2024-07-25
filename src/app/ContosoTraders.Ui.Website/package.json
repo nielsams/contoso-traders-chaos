@@ -1,0 +1,58 @@
+{
+  "name": "website-ui",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@mui/icons-material": "^5.13.7",
+    "@mui/material": "^5.14.0",
+    "axios": "^1.6.0",
+    "formik": "^2.4.4",
+    "history": "^5.3.0",
+    "msal": "^1.4.18",
+    "mui-file-dropzone": "^4.0.2",
+    "qs": "^6.11.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-material-ui-carousel": "^3.4.2",
+    "react-redux": "^8.1.1",
+    "react-router-dom": "^6.14.1",
+    "react-scripts": "5.0.1",
+    "redux": "^4.2.1",
+    "web-vitals": "^3.3.2",
+    "yup": "^1.2.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.43.1",
+    "@types/node": "^18.11.18",
+    "babel-plugin-macros": "^3.1.0",
+    "csv-parse": "^5.5.0",
+    "sass": "^1.63.6",
+    "typescript": "^5.1.6"
+  },
+  "overrides": {
+    "typescript": "^5.1.6"
+  }
+}
