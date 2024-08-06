@@ -5,7 +5,7 @@ param nameprefix string
 param location string = resourceGroup().location
 
 // First experiment: Disable a VMSS node
-module chaos1 './chaos-experiments/chaos-vmss-disable-node.bicep' = {
+module chaos1 '../chaos-experiments/chaos-vmss-disable-node.bicep' = {
   name: '${nameprefix}-chaos-1'
   params: {
     nameprefix: nameprefix
@@ -14,7 +14,7 @@ module chaos1 './chaos-experiments/chaos-vmss-disable-node.bicep' = {
 }
 
 // Second experiment: Deny access to a Key Vault
-module chaos2 './chaos-experiments/chaos-keyvault-deny.bicep' = {
+module chaos2 '../chaos-experiments/chaos-keyvault-deny.bicep' = {
   name: '${nameprefix}-chaos-2'
   params: {
     nameprefix: nameprefix
