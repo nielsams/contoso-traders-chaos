@@ -1,7 +1,21 @@
 // import { config } from 'dotenv';
-import * as Msal from 'msal';
+import * as msal from "@azure/msal-browser";
 import { ConfigService } from './'
 export default class AuthB2CService {
+    initializeMsalAgent = async () => {
+        this.msalAgent = new msal.PublicClientApplication(this.applicationConfig);
+        
+        // Needs to be initialized first
+        await this.msalAgent.initialize();
+
+        // this.msalAgent = new PublicClientApplication(this.applicationConfig);
+        const response = await this.msalAgent.handleRedirectPromise();
+        
+        if(!response || !response.accessToken) {
+            await this.login();
+        }
+    }
+
     constructor() {
         this.applicationConfig = {
             auth: {
@@ -15,17 +29,11 @@ export default class AuthB2CService {
                 storeAuthStateInCookie: false
             }
         }
-
-        this.msalAgent = new Msal.UserAgentApplication(this.applicationConfig);
-        // this.msalAgent = new PublicClientApplication(this.applicationConfig);
-        this.msalAgent.handleRedirectCallback(async (error, response) => {
-            if(!response.accessToken) {
-                await this.login();
-            }
-        });
+        this.initializeMsalAgent();
     }
 
     login = async () => {
+        await this.msalAgent.clearCache();
         let responseUser;
         await this.msalAgent.loginPopup(
             {
@@ -44,7 +52,7 @@ export default class AuthB2CService {
         // });
     }
 
-    logout = () => this.msalAgent.logout();
+    logout = async () => await this.msalAgent.logoutRedirect()
 
     getToken = async () => {
         return await this.msalAgent.acquireTokenSilent({ scopes: [ConfigService._B2cScopes], authority: ConfigService._B2cAuthority })
