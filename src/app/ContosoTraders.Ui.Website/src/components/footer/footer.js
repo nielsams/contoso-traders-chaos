@@ -33,8 +33,12 @@ const Footer = () => {
             .then(res => res.json())
             .then(dat => {
                 setStatus(null);
-                let address = dat.resourceSets[0].resources[0].address.locality + ', ' + dat.resourceSets[0].resources[0].address.countryRegion;
-                setLocation(address)
+                if ( dat.resourceSets[0]) {
+                    let address = dat.resourceSets[0].resources[0].address.locality + ', ' + dat.resourceSets[0].resources[0].address.countryRegion;
+                    setLocation(address)    
+                } else {
+                    console.error(dat.errorDetails[0])
+                }
             })
     }
 
